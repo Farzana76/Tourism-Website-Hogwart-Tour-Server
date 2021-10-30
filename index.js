@@ -20,6 +20,7 @@ async function run(){
         
         const database = client.db('hogwart_world');
         const servicesCollection = database.collection('services');
+        const ordersCollection = database.collection('orders');
 
         // GET API
         app.get('/services', async (req, res) => {
@@ -36,7 +37,14 @@ async function run(){
             const result = await servicesCollection.insertOne(service);
             console.log(result);
             res.json(result);
-        });s
+        });
+
+        //Orders API
+        app.post('/orders', async(req, res) =>{
+            const order = req.body;
+            const result = await ordersCollection.insertOne(order);
+            res.json(result);
+        });
 
     }
     finally{
