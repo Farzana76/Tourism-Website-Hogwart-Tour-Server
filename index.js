@@ -39,12 +39,21 @@ async function run(){
             res.json(result);
         });
 
+        // GET my orders API
+        app.get('/orders', async (req, res) => {
+            const cursor = ordersCollection.find({});
+            const orders = await cursor.toArray();
+            res.send(orders);
+        });
+
         //Orders API
         app.post('/orders', async(req, res) =>{
             const order = req.body;
             const result = await ordersCollection.insertOne(order);
             res.json(result);
         });
+
+        //My orders get
 
     }
     finally{
